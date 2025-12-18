@@ -138,6 +138,7 @@ chesttools.on_receive_fields = function(pos, formname, fields, player)
 		end
 	end
 
+	local esc = minetest.formspec_escape;
 	local meta = minetest.get_meta( pos );
 	local chestname = meta:get_string( 'chestname' );
 	local spos = pos.x .. "," .. pos.y .. "," .. pos.z
@@ -149,12 +150,12 @@ chesttools.on_receive_fields = function(pos, formname, fields, player)
 		meta:set_string("formspec", chesttools.formspec..
 			"listring[current_name;main]"..
 			"listring[current_player;main]"..
-			"field[1.8,10.0;6,0.5;chestname;;"..chestname.."]");
+			"field[1.8,10.0;6,0.5;chestname;;"..esc(chestname).."]");
 	end
 
 	local formspec = "size[9,10]"..
 			"label[0.5,9.7;Name:]"..
-			"field[1.8,10.0;6,0.5;chestname;;"..tostring( chestname or "unconfigured").."]"..
+			"field[1.8,10.0;6,0.5;chestname;;"..tostring( esc(chestname) or "unconfigured").."]"..
 			"button[7.5,9.7;1,0.5;set_chestname;Store\nName]"..
 --			"button[8.6,9.7;0.5,0.5;change_color;C]"..
 		"image_button[8.4,9.7;0.5,0.5;chesttools_palette.png;change_color;]"..
